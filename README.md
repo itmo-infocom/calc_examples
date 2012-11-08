@@ -12,3 +12,5 @@ Example_2 -- simple calc with "expr" evaluation.
 Example_3 -- shell spec. symbols escaping and formating input for "expr".
 
 Example_4 -- Text UI.
+
+Example_5 -- GUI.

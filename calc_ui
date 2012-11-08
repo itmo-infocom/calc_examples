@@ -4,6 +4,8 @@ FILE1=/tmp/calc1-$$
 FILE2=/tmp/calc2-$$
 ERROR=/tmp/calc-err-$$
 
+which gdialog 2> /dev/null && DIALOG=gdialog || DIALOG=dialog
+
 end () {
 	rm -f $FILE1 $FILE2 $ERROR
 	exit
@@ -11,13 +13,13 @@ end () {
 
 while true
 do
-	dialog --inputbox "Enter expression:" 8 35 2> $FILE1 || end
+	$DIALOG --inputbox "Enter expression:" 8 35 2> $FILE1 || end
 	if cat $FILE1 | calc > $FILE2 2>$ERROR
 	then
 		MSG="Result: `cat $FILE2`\n\nContinue?"
-		dialog --yesno "$MSG" 7 20 || end
+		$DIALOG --yesno "$MSG" 7 20 || end
 	else
 		MSG="Error:\n\n`cat $ERROR`\n\nContinue?"
-		dialog --yesno "$MSG" 10 35 || end
+		$DIALOG --yesno "$MSG" 10 35 || end
 	fi
 done
