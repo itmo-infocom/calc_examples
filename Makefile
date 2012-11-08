@@ -1,3 +1,6 @@
+install:
+	install calc calc_ui /usr/local/bin
+
 clone:
 	git clone https://github.com/itmo-infocom/calc_examples.git
 
