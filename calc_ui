@@ -54,13 +54,13 @@ fi
 
 while true
 do
-	$DIALOG --inputbox "Enter expression:" 8 35 2> $FILE1 || end
+	$DIALOG --inputbox "`gettext \"Enter expression:\"`" 8 35 2> $FILE1 || end
 	if cat $FILE1 | $CALC > $FILE2 2>$ERROR
 	then
-		MSG="Result: `cat $FILE2`\n\nContinue?"
+		MSG="`gettext \"Result:\"` `cat $FILE2`\\n\\n`gettext \"Continue?\"`"
 		$DIALOG --yesno "$MSG" 7 20 || end
 	else
-		MSG="Error:\n\n`cat $ERROR`\n\nContinue?"
+		MSG="`gettext \"Error:\"`\\n\\n`cat $ERROR`\\n\\n`gettext \"Continue?\"`"
 		$DIALOG --yesno "$MSG" 10 35 || end
 	fi
 done

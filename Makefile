@@ -5,6 +5,9 @@ install:
 	install calc.xinetd /etc/xinetd.d/calc
 	ln -s /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
 
+calc_ui.pot: calc_ui
+	xgettext -o calc_ui.pot -L Shell calc_ui
+
 clone:
 	git clone https://github.com/itmo-infocom/calc_examples.git
 
