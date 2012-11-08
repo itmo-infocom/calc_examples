@@ -20,3 +20,5 @@ Example_6 -- Network server.
 Example_7 -- UI for networked calc.
 
 Example_8 -- Localization. 
+
+Example_9 -- Russian L10N.

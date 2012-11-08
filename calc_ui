@@ -8,6 +8,8 @@ FILE1=/tmp/calc1-$$
 FILE2=/tmp/calc2-$$
 ERROR=/tmp/calc-err-$$
 
+GETTEXT="gettext -d calc_ui"
+
 if [ -r ~/.calc.conf ]
 then
 	. ~/.calc.conf
@@ -54,13 +56,13 @@ fi
 
 while true
 do
-	$DIALOG --inputbox "`gettext \"Enter expression:\"`" 8 35 2> $FILE1 || end
+	$DIALOG --inputbox "`$GETTEXT \"Enter expression:\"`" 8 35 2> $FILE1 || end
 	if cat $FILE1 | $CALC > $FILE2 2>$ERROR
 	then
-		MSG="`gettext \"Result:\"` `cat $FILE2`\\n\\n`gettext \"Continue?\"`"
+		MSG="`$GETTEXT \"Result:\"` `cat $FILE2`\\n\\n`$GETTEXT \"Continue?\"`"
 		$DIALOG --yesno "$MSG" 7 20 || end
 	else
-		MSG="`gettext \"Error:\"`\\n\\n`cat $ERROR`\\n\\n`gettext \"Continue?\"`"
+		MSG="`$GETTEXT \"Error:\"`\\n\\n`cat $ERROR`\\n\\n`$GETTEXT \"Continue?\"`"
 		$DIALOG --yesno "$MSG" 10 35 || end
 	fi
 done

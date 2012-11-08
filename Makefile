@@ -1,4 +1,4 @@
-install:
+install: calc_ui-ru.mo
 	install calc calc_ui /usr/local/bin
 	which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
 	grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
@@ -7,6 +7,9 @@ install:
 
 calc_ui.pot: calc_ui
 	xgettext -o calc_ui.pot -L Shell calc_ui
+
+calc_ui-ru.mo: calc_ui-ru.po
+	msgfmt -o calc_ui-ru.mo calc_ui-ru.po
 
 clone:
 	git clone https://github.com/itmo-infocom/calc_examples.git
