@@ -1,0 +1,12 @@
+# default: on
+# description: The calculator server
+service calc
+{
+	flags		= REUSE
+	socket_type	= stream        
+	wait		= no
+	user		= nobody
+	server		= /data/home/sadov/works/courses/calc
+	disable		= no
+}
+
