@@ -6,7 +6,7 @@ service calc
 	socket_type	= stream        
 	wait		= no
 	user		= nobody
-	server		= /data/home/sadov/works/courses/calc
+	server		= /usr/local/bin/calc
 	disable		= no
 }
 
