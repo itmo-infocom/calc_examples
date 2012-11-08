@@ -3,6 +3,7 @@ install:
 	which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
 	grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
 	install calc.xinetd /etc/xinetd.d/calc
+	ln -s /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
 
 clone:
 	git clone https://github.com/itmo-infocom/calc_examples.git

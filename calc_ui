@@ -1,20 +1,61 @@
 #!/bin/sh
 
+CALC=calc
+HOST=localhost
+PORT=1234
+
 FILE1=/tmp/calc1-$$
 FILE2=/tmp/calc2-$$
 ERROR=/tmp/calc-err-$$
 
+if [ -r ~/.calc.conf ]
+then
+	. ~/.calc.conf
+elif [ -r /etc/calc.conf ]
+then
+	. /etc/calc.conf
+fi
+
 which gdialog 2> /dev/null && DIALOG=gdialog || DIALOG=dialog
+
+help () {
+        echo "Usage: $0 [ host [port] | --help ]"
+}
 
 end () {
 	rm -f $FILE1 $FILE2 $ERROR
 	exit
 }
 
+if [ $# -eq 1 ]
+then
+        if [ $1 -eq '--help' ]
+        then
+                help
+                exit -1
+        else
+                HOST=$1
+        fi
+elif [ $# -eq 2 ]
+then
+        PORT=$2
+fi
+
+if [ $# -ge 1 -o `basename $0` = 'ncalc_ui' ]
+then
+	if [ $HOST -a $PORT ]
+	then
+	        CALC="nc $HOST $PORT"
+	else
+		echo "You must set HOST and PORT"
+		exit -2
+	fi
+fi
+
 while true
 do
 	$DIALOG --inputbox "Enter expression:" 8 35 2> $FILE1 || end
-	if cat $FILE1 | calc > $FILE2 2>$ERROR
+	if cat $FILE1 | $CALC > $FILE2 2>$ERROR
 	then
 		MSG="Result: `cat $FILE2`\n\nContinue?"
 		$DIALOG --yesno "$MSG" 7 20 || end
