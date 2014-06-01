@@ -3,7 +3,7 @@ install: calc_ui-ru.mo
 	which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
 	grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
 	install calc.xinetd /etc/xinetd.d/calc
-	ln -s /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
+	ln -sf /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
 	install calc_ui-ru.mo /usr/share/locale/ru/LC_MESSAGES/calc_ui.mo
 
 calc_ui.pot: calc_ui
